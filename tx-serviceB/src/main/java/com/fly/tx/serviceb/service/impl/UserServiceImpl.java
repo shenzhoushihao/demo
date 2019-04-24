@@ -28,7 +28,7 @@ public class UserServiceImpl implements IUserService {
 	@LcnTransaction
 	@Transactional
 	@Override
-	public UserInfo saveUserAndOrder(String exType) {
+	public UserInfo saveUserAndOrder(String exType) throws Exception {
 		UserInfo user = new UserInfo();
 		user.setUserName(UUID.randomUUID().toString());
 		user.setTrueName("zhangSir");

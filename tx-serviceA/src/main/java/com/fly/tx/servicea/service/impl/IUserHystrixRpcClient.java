@@ -11,9 +11,9 @@ import lombok.extern.slf4j.Slf4j;
 public class IUserHystrixRpcClient implements IUserRpcClient {
 
 	@Override
-	public boolean saveUser(String exType) {
+	public boolean saveUser(String exType) throws Exception {
 		log.warn("saveUser rpc fallback,exType:{}", exType);
-		return false;
+		throw new Exception("rpc fail.");
 	}
 
 }

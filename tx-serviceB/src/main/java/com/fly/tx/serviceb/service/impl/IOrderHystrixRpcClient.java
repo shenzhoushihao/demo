@@ -11,9 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 public class IOrderHystrixRpcClient implements IorderRpcClient {
 
 	@Override
-	public boolean saveOrder(Integer uid, String exType) {
+	public boolean saveOrder(Integer uid, String exType) throws Exception {
 		log.warn("saveOrder rpc fallback,uid:{},exType:{}", uid, exType);
-		return false;
+		throw new Exception("rpc fail");
 	}
-
 }
