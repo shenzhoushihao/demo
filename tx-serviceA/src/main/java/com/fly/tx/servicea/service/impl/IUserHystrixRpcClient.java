@@ -17,5 +17,4 @@ public class IUserHystrixRpcClient implements IUserRpcClient {
 		log.warn("saveUser rpc fallback,exType:{}", exType);
 		throw new ARPCException("rpc fail.", ARPCError.RPC_ERROR);
 	}
-
 }

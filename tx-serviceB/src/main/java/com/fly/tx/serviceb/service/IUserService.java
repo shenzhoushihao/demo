@@ -8,5 +8,5 @@ public interface IUserService {
 
 	UserInfo saveOrderAndUser(String exType);
 
-	UserInfo saveUser(String exType);
+	boolean saveUser(String exType);
 }

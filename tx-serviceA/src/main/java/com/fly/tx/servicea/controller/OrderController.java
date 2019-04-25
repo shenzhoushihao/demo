@@ -15,8 +15,7 @@ public class OrderController {
 	private IOrderService orderService;
 
 	@PostMapping(value = "/v0/user/{uid}/order")
-	public boolean saveOrder(@PathVariable(value = "uid") Integer uid, @RequestParam(value = "exType") String exType)
-			throws Exception {
+	public boolean saveOrder(@PathVariable(value = "uid") Integer uid, @RequestParam(value = "exType") String exType) {
 		boolean isSuccess = false;
 		isSuccess = orderService.saveOrder(uid, exType);
 		return isSuccess;

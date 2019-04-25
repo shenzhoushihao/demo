@@ -16,19 +16,17 @@ public class UserController {
 	private IUserService userService;
 
 	@GetMapping(value = "/v9/test1")
-	public UserInfo saveUserAndOrder(@RequestParam(value = "exType", defaultValue = "0") String exType)
-			throws Exception {
+	public UserInfo saveUserAndOrder(@RequestParam(value = "exType", defaultValue = "0") String exType) {
 		return userService.saveUserAndOrder(exType);
 	}
 
 	@GetMapping(value = "/v9/test2")
-	public UserInfo saveOrderAndUser(@RequestParam(value = "exType", defaultValue = "0") String exType)
-			throws Exception {
+	public UserInfo saveOrderAndUser(@RequestParam(value = "exType", defaultValue = "0") String exType) {
 		return userService.saveOrderAndUser(exType);
 	}
 
 	@PostMapping(value = "/v0/user")
-	public UserInfo saveUser(@RequestParam(value = "exType", defaultValue = "0") String exType) throws Exception {
+	public boolean saveUser(@RequestParam(value = "exType", defaultValue = "0") String exType) {
 		return userService.saveUser(exType);
 	}
 

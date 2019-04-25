@@ -46,7 +46,7 @@ public class UserServiceImpl implements IUserService {
 	@Transactional
 	@Override
 	public UserInfo saveOrderAndUser(String exType) {
-		boolean saveOrderStatus = orderRpcClient.saveOrder((int) (Math.random() * 10), exType);
+		boolean saveOrderStatus = orderRpcClient.saveOrder(11, exType);
 		log.info("saveOrderStatus=========>{}", saveOrderStatus);
 
 		UserInfo user = new UserInfo();
@@ -64,16 +64,16 @@ public class UserServiceImpl implements IUserService {
 	@LcnTransaction
 	@Transactional
 	@Override
-	public UserInfo saveUser(String exType) {
+	public boolean saveUser(String exType) {
 		UserInfo user = new UserInfo();
 		user.setUserName(UUID.randomUUID().toString());
 		user.setTrueName("liSir");
 		user.setEmail("world@li.com");
 		user.setAge((int) (Math.random() * 100));
-		UserInfo u0 = userRepository.saveAndFlush(user);
+		userRepository.saveAndFlush(user);
 		if (StringUtils.isNotBlank(exType) && exType.equalsIgnoreCase("3")) {
 			throw new BRPCException("2 save user fail.", BRPCError.RPC_BAD_REQUEST);
 		}
-		return u0;
+		return true;
 	}
 }
