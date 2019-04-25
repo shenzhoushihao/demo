@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
 import com.fly.tx.servicea.Entity.OrderInfo;
+import com.fly.tx.servicea.config.ARPCError;
+import com.fly.tx.servicea.config.ARPCException;
 import com.fly.tx.servicea.dao.OrderRepository;
 import com.fly.tx.servicea.service.IOrderService;
 import com.fly.tx.servicea.service.IUserRpcClient;
@@ -27,7 +29,7 @@ public class OrderServiceImpl implements IOrderService {
 	@LcnTransaction
 	@Transactional
 	@Override
-	public boolean saveOrder(Integer uid, String exType) throws Exception {
+	public boolean saveOrder(Integer uid, String exType) {
 		boolean saveUser = userRpcClient.saveUser(exType);
 		log.info("save user 2,flag:{}.", saveUser);
 		OrderInfo orderInfo = new OrderInfo();
@@ -35,7 +37,7 @@ public class OrderServiceImpl implements IOrderService {
 		orderInfo.setAddress("天津市");
 		orderInfo.setUid(uid);
 		if (StringUtils.isNoneBlank(exType) && exType.equalsIgnoreCase("1")) {
-			throw new Exception("AAA service operate failed.");
+			throw new ARPCException("AAA service operate failed.", ARPCError.RPC_BAD_REQUEST);
 		}
 		OrderInfo order = orderRepository.saveAndFlush(orderInfo);
 		return (order != null);

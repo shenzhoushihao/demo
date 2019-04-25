@@ -10,5 +10,5 @@ import com.fly.tx.servicea.service.impl.IUserHystrixRpcClient;
 public interface IUserRpcClient {
 
 	@PostMapping(value = "/v0/user")
-	boolean saveUser(@RequestParam(value = "exType") String exType) throws Exception;
+	boolean saveUser(@RequestParam(value = "exType") String exType);
 }

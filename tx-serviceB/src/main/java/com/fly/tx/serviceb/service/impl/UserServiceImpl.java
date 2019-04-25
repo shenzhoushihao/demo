@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.codingapi.txlcn.tc.annotation.LcnTransaction;
+import com.fly.tx.serviceb.config.BRPCError;
+import com.fly.tx.serviceb.config.BRPCException;
 import com.fly.tx.serviceb.dao.UserRepository;
 import com.fly.tx.serviceb.entity.UserInfo;
 import com.fly.tx.serviceb.service.IUserService;
@@ -28,7 +30,7 @@ public class UserServiceImpl implements IUserService {
 	@LcnTransaction
 	@Transactional
 	@Override
-	public UserInfo saveUserAndOrder(String exType) throws Exception {
+	public UserInfo saveUserAndOrder(String exType) {
 		UserInfo user = new UserInfo();
 		user.setUserName(UUID.randomUUID().toString());
 		user.setTrueName("zhangSir");
@@ -43,7 +45,7 @@ public class UserServiceImpl implements IUserService {
 	@LcnTransaction
 	@Transactional
 	@Override
-	public UserInfo saveOrderAndUser(String exType) throws Exception {
+	public UserInfo saveOrderAndUser(String exType) {
 		boolean saveOrderStatus = orderRpcClient.saveOrder((int) (Math.random() * 10), exType);
 		log.info("saveOrderStatus=========>{}", saveOrderStatus);
 
@@ -54,7 +56,7 @@ public class UserServiceImpl implements IUserService {
 		user.setAge((int) (Math.random() * 100));
 		UserInfo u0 = userRepository.saveAndFlush(user);
 		if (StringUtils.isNotBlank(exType) && StringUtils.equalsIgnoreCase(exType, "2")) {
-			throw new Exception("user save, throw new exception.");
+			throw new BRPCException(BRPCError.RPC_BAD_REQUEST);
 		}
 		return u0;
 	}
@@ -62,7 +64,7 @@ public class UserServiceImpl implements IUserService {
 	@LcnTransaction
 	@Transactional
 	@Override
-	public UserInfo saveUser(String exType) throws Exception {
+	public UserInfo saveUser(String exType) {
 		UserInfo user = new UserInfo();
 		user.setUserName(UUID.randomUUID().toString());
 		user.setTrueName("liSir");
@@ -70,7 +72,7 @@ public class UserServiceImpl implements IUserService {
 		user.setAge((int) (Math.random() * 100));
 		UserInfo u0 = userRepository.saveAndFlush(user);
 		if (StringUtils.isNotBlank(exType) && exType.equalsIgnoreCase("3")) {
-			throw new Exception("2 save user fail.");
+			throw new BRPCException("2 save user fail.", BRPCError.RPC_BAD_REQUEST);
 		}
 		return u0;
 	}

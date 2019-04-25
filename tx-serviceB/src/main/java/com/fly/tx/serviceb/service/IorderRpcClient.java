@@ -11,6 +11,5 @@ import com.fly.tx.serviceb.service.impl.IOrderHystrixRpcClient;
 public interface IorderRpcClient {
 
 	@PostMapping(value = "/v0/user/{uid}/order")
-	boolean saveOrder(@PathVariable(value = "uid") Integer uid, @RequestParam(value = "exType") String exType)
-			throws Exception;
+	boolean saveOrder(@PathVariable(value = "uid") Integer uid, @RequestParam(value = "exType") String exType);
 }

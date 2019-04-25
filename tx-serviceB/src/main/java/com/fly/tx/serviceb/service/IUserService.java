@@ -4,9 +4,9 @@ import com.fly.tx.serviceb.entity.UserInfo;
 
 public interface IUserService {
 
-	UserInfo saveUserAndOrder(String exType) throws Exception;
+	UserInfo saveUserAndOrder(String exType);
 
-	UserInfo saveOrderAndUser(String exType) throws Exception;
+	UserInfo saveOrderAndUser(String exType);
 
-	UserInfo saveUser(String exType) throws Exception;
+	UserInfo saveUser(String exType);
 }
